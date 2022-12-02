@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <copy todir="D:\dev\eclipse-markettools\MarketTools\lib\apache.commons.math\commons-math3-3.6.1-src\target/apidocs/META-INF">
+    <fileset dir="D:\dev\eclipse-markettools\MarketTools\lib\apache.commons.math\commons-math3-3.6.1-src">
+      <include name="LICENSE.txt"/>
+      <include name="NOTICE.txt"/>
+    </fileset>
+  </copy>
+</target>
+</project>

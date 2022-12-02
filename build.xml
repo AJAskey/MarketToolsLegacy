@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="MarketTools">
+    <property environment="env"/>
+    <property name="src.link" value="../../MarketTools - dev/src"/>
+    <property name="lib.link" value="../../MarketTools - dev/lib"/>
+    <property name="Test.link" value="../../MarketTools - dev/Test"/>
+    <property name="junit.output.dir" value="junit"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="JUnit 5.libraryclasspath">
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.junit.jupiter.api_5.6.0.v20200203-2009.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.junit.jupiter.engine_5.6.0.v20200203-2009.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.junit.jupiter.migrationsupport_5.6.0.v20200203-2009.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.junit.jupiter.params_5.6.0.v20200203-2009.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.junit.platform.commons_1.6.0.v20200203-2009.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.junit.platform.engine_1.6.0.v20200203-2009.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.junit.platform.launcher_1.6.0.v20200203-2009.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.junit.platform.runner_1.6.0.v20200203-2009.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.junit.platform.suite.api_1.6.0.v20200203-2009.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.junit.vintage.engine_5.6.0.v20200203-2009.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.opentest4j_1.2.0.v20190826-0900.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.apiguardian_1.1.0.v20190826-0900.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.junit_4.13.0.v20200204-1500.jar"/>
+        <pathelement location="C:/Users/Computer/.p2/pool/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+    </path>
+    <path id="MarketTools.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="lib/apache.commons.math/commons-math3-3.5.jar"/>
+        <pathelement location="lib/commons-io-2.6/commons-io-2.6.jar"/>
+        <pathelement location="lib/commons-text-1.8/commons-text-1.8.jar"/>
+        <pathelement location="lib/json-simple-1.1.1/json-simple-1.1.1.jar"/>
+        <pathelement location="lib/apache.commons-lang3/commons-lang3-3.8.1.jar"/>
+        <path refid="JUnit 5.libraryclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="${src.link}">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="${lib.link}">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="${Test.link}">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="${src.link}"/>
+            <src path="${lib.link}"/>
+            <src path="${Test.link}"/>
+            <classpath refid="MarketTools.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="CashFileData">
+        <java classname="net.ajaskey.market.tools.SIP.BigDB.dataio.CashFileData" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="CollationTests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.collation.CollationTests" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="CollationTests0.test00029">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.collation.CollationTests0" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="CollationTests1">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.collation.CollationTests1" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="CollationTests5">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.collation.CollationTests5" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="CommonTests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.common.CommonTests" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="CommonTests0">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.common.CommonTests0" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="CommonTests1">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.common.CommonTests1" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="CommonTests2">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.common.CommonTests2" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="CommonTests3">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.common.CommonTests3" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="WriteOptumaExternal">
+        <java classname="net.ajaskey.market.tools.SIP.BigDB.reports.WriteOptumaExternal" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="WriteSupplyDemand">
+        <java classname="net.ajaskey.market.tools.SIP.BigDB.reports.WriteSupplyDemand" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="Z2" depends="Refresh,CompanyData,IG,WriteOptumaExternal,WriteSupplyDemand">
+        <java classname="net.ajaskey.market.tools.SIP.BigDB.reports.WriteZombies" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="SipData">
+        <java classname="net.ajaskey.market.tools.SIP.SipData" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>	
+	<target name="Refresh">
+        <java classname="net.ajaskey.market.tools.SIP.BigDB.reports.utils.RefreshSip" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="CompanyData">
+        <java classname="net.ajaskey.market.tools.SIP.CompanyData" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="CompanyDataTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.CompanyDataTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="C-19">
+        <java classname="net.ajaskey.covid19.OurWorldData" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="C-19P" depends="C-19">
+        <java classname="net.ajaskey.covid19.ProcessOurWorldData" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="CompanyDerived">
+        <java classname="net.ajaskey.market.tools.SIP.BigDB.derived.CompanyDerived" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="CompanySummary">
+        <java classname="net.ajaskey.market.tools.SIP.BigDB.collation.CompanySummary" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="DataIoTests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.dataio.DataIoTests" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="DbTests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.DbTests" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="DbTests1.test0503">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.DbTests1" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="DbTests2.test1001">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.DbTests2" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="DbTests3">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.DbTests3" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="DbTests4.test2019">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.DbTests4" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="DerivedTests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.derived.DerivedTests" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="ErrorTest (1)">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.collation.ErrorTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="ErrorTest (2)">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.ErrorTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="ErrorTest (3)">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.common.ErrorTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="ErrorTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.dataio.ErrorTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="ErrorTest0 (1)">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.ErrorTest0" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="ErrorTest0">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.common.ErrorTest0" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="ErrorTest0.test007">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.dataio.ErrorTest0" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="ErrorTest0.test14">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.dataio.ErrorTest0" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="FixHeaders">
+        <java classname="net.ajaskey.sandbox.FixHeaders" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="FBK">
+        <java classname="net.ajaskey.market.tools.fred.FredBookkeeping" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="FDD">
+        <java classname="net.ajaskey.market.tools.fred.FredDataDownloader" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="Fundamentals">
+        <java classname="net.ajaskey.market.tools.SIP.BigDB.reports.Fundamentals" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="GlobalsHappyPathTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.GlobalsHappyPathTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="GlobalsHappyPathTest.testCheckList">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.GlobalsHappyPathTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="GlobalsTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.GlobalsTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="GzipTest">
+        <java classname="net.ajaskey.sandbox.GzipTest" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="GzipTestTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.sandbox.GzipTestTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="HappyPathTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.HappyPathTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="HappyPathTest.testCompanySummar">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.HappyPathTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="HappyPathTest.testCompanySummary">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.HappyPathTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="HappyPathTest.testData">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.HappyPathTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="HappyPathTest.testGet">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.HappyPathTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="HappyPathTest.testHappyPath">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.HappyPathTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="HappyPathTest.testSipData">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.HappyPathTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="HappyPathTest.testSipParser">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.HappyPathTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="HiresSeps">
+        <java classname="net.ajaskey.market.tools.fred.HiresSeps" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="IndexDerived">
+        <java classname="net.ajaskey.market.tools.SIP.BigDB.derived.IndexDerived" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="IndexEarnings">
+        <java classname="net.ajaskey.market.tools.SIP.BigDB.derived.IndexEarnings" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="IG">
+        <java classname="net.ajaskey.market.tools.SIP.IndexGrowth" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="MarketToolsReflection">
+        <java classname="net.ajaskey.sandbox.MarketToolsReflection" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="net.ajaskey.market.tools.SIP.BigDB.collation">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.collation.CollationTests" todir="${junit.output.dir}"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.collation.CollationTests0" todir="${junit.output.dir}"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.collation.CollationTests1" todir="${junit.output.dir}"/>
+            <test name="net.ajaskey.market.tools.SIP.BigDB.collation.CollationTests2" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="OptionCboe">
+        <java classname="net.ajaskey.market.tools.options.workbench.OptionCboe" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="OptionStatistics">
+        <java classname="net.ajaskey.market.tools.options.workbench.OptionStatistics" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="OptionStatus">
+        <java classname="net.ajaskey.market.tools.options.workbench.OptionStatus" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="Options" depends="OptionStatus">
+        <java classname="net.ajaskey.market.tools.options.workbench.OptionCboe" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="PI">
+        <java classname="net.ajaskey.market.tools.ProcessInternals" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="RegressionTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.ajaskey.common.RegressionTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="MarketTools.classpath"/>
+        </junit>
+    </target>
+    <target name="SipDbData">
+        <java classname="net.ajaskey.market.tools.SIP.BigDB.SipDbData" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="SpxEarnings">
+        <java classname="net.ajaskey.market.tools.SIP.SpxEarnings" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="TestBinary">
+        <java classname="net.ajaskey.sandbox.TestBinary" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="TextUtils">
+        <java classname="net.ajaskey.common.TextUtils" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="ProcessEIA">
+        <java classname="net.ajaskey.market.tools.quandl.ProcessEIA" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="ProcessQuandl">
+        <java classname="net.ajaskey.market.tools.quandl.ProcessQuandl" failonerror="true" fork="yes">
+            <classpath refid="MarketTools.classpath"/>
+        </java>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+</project>
