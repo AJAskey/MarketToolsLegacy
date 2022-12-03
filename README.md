@@ -1,2 +1,3 @@
 # MarketToolsLegacy
- Previous Version of MarketTools
+
+ Previous Version of MarketTools - a Java project.
